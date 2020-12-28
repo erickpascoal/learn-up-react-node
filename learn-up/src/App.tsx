@@ -1,7 +1,7 @@
 import React from 'react';
 import GlobalStyle from './styles/Global'
-import ModuleList from './modules/lesson/pages/module/ModuleList';
 import Routes from './routes';
+import Header from './components/Header';
 
 // import { Container } from './styles';
 

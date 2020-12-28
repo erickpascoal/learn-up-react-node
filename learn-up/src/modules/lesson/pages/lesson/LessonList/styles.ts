@@ -1,15 +1,14 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
-  padding: 30px;
+  padding: 30px 70px;
 
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
 `;
 
-export const Lesson = styled(Link)`
+export const Lesson = styled.a`
   background-color: #202024;
   margin: 8px;
   width: 100%;
@@ -49,5 +48,4 @@ export const Lesson = styled(Link)`
   svg {
     color: #87868B;
   }
-
 `;

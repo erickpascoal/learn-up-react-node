@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
-import { useHistory, useRouteMatch } from 'react-router-dom';
+import { useRouteMatch } from 'react-router-dom';
 
 import { Container, ContainerSubModule, SubModule } from './styles';
 
@@ -10,11 +10,7 @@ interface PropsParam {
 
 const SubModuleList: React.FC = () => {
   const [subModules, setSubModules] = useState([]);
-  const history = useHistory();
   const { params } = useRouteMatch<PropsParam>();
-
-  // const url = 'https://player.vimeo.com/video/493876389?color=ffffff&title=0&byline=0&portrait=0';
-  // <iframe src={url} width="640" height="360" allow="autoplay; fullscreen" ></iframe>
 
   useEffect(() => {
     loadSubModules();
