@@ -1,12 +1,13 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import axios from 'axios';
 import { Link, useRouteMatch } from 'react-router-dom';
-
-import { Container, Content, HeaderContent, Lesson } from './styles';
 import { FaChevronRight } from 'react-icons/fa';
 import { FaArrowRight } from 'react-icons/fa';
+
+import { Container, Content, HeaderContent, Lesson } from './styles';
 import Modal from '../../../../../components/Modal';
 import Button from '../../../../../components/Button';
+import NoDataFound from '../../../../../components/NoDataFound';
+import api from '../../../../../services/api';
 
 interface PropsParam {
   subModuleId: string;
@@ -27,7 +28,7 @@ const LessonList: React.FC = () => {
   }, []);
 
   const loadSubModules = useCallback(async () => {
-    const response = await axios.get(`http://localhost:8080/lessons/submodule/${params.subModuleId}`);
+    const response = await api.get(`/lessons/submodule/${params.subModuleId}`);
     setLessons(response.data);
   }, [params]);
 
@@ -48,28 +49,35 @@ const LessonList: React.FC = () => {
     <>
       <Container>
         <HeaderContent>
-          <h1>
+          <h2>
             <Link to="/">Cursos</Link>
             <FaArrowRight size={14} />
             <a onClick={goToBack}>{moduleName} </a>
             <FaArrowRight size={14} />
             {subModuleName}
-          </h1>
+          </h2>
           <Button buttonClass="primary">Cadastrar</Button>
         </HeaderContent>
 
         <Content>
-          {lessons.map((lesson: any) => (
-            <Lesson key={lesson.id} onClick={() => setLessonSelected(lesson)}  >
-              <div>
-                <h1>{lesson.name}</h1>
-                <p>{lesson.description}</p>
-              </div>
+          {lessons.length > 0 ?
+            lessons.map((lesson: any) => (
+              <Lesson key={lesson.id} onClick={() => setLessonSelected(lesson)}  >
+                <div>
+                  <h1>{lesson.name}</h1>
+                  <p>{lesson.description}</p>
+                </div>
 
-              <FaChevronRight size={23} />
+                <FaChevronRight size={23} />
 
-            </Lesson>
-          ))}
+              </Lesson>
+            )) :
+
+            <NoDataFound>
+              <h3>Nenhuma aula foi cadastrada para este modulo ainda.</h3>
+            </NoDataFound>
+
+          }
         </Content>
 
       </Container>

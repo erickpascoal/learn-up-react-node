@@ -14,7 +14,14 @@ export const HeaderContent = styled.div`
   align-items: center;
   margin-bottom: 20px;
 
+  h2 {
+    a {
+      color: #8a96a3;
+    }
+  }
+
   svg {
+    color: #8a96a3;
     margin: 0 10px 0 10px;
   }
 `;

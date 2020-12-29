@@ -25,8 +25,8 @@ const Header: React.FC = () => {
       <Link to="/">Learn-up</Link>
       { showBackButtton &&
         <button onClick={goBack}>
-          <FaArrowLeft size={15} />
-          <h2> Voltar</h2>
+          <FaArrowLeft size={14} />
+          <h3> Voltar</h3>
         </button>
       }
     </Container>

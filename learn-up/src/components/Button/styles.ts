@@ -9,12 +9,11 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export const ButtonStyle = styled.button<ButtonProps>`
-  padding: 15px 50px;
+  padding: 13px 50px;
   min-width: 100px;
   border-style: none;
   border-radius: 5px;
   font-weight: 500;
-  font-size: 16px;
   color: #ffffff;
   border: solid 1px #202024;
   transition: background-color 0.2s;

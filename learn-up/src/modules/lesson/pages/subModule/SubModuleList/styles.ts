@@ -10,14 +10,20 @@ export const Container = styled.div`
   justify-content: center;
 `;
 
-
 export const HeaderContent = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 20px;
 
+  h2 {
+    a {
+      color: #8a96a3;
+    }
+  }
+
   svg {
+    color: #8a96a3;
     margin: 0 10px 0 10px;
   }
 `;

@@ -15,6 +15,11 @@ const Button: React.FC<ButtonProps> = ({ children, buttonClass = 'default', ...r
     borderColorHover = '#ffffff';
   }
 
+  if (buttonClass == 'dark') {
+    backgroundColor = '#121214';
+    borderColorHover = '#ffffff';
+  }
+
   if (buttonClass == 'primary') {
     backgroundColor = '#8257e5';
   }
