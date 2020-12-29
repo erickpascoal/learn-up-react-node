@@ -21,8 +21,8 @@ export const ContainerModal = styled.div`
 
 export const ModalStyle = styled.div`
     padding: 10px;
-    max-width: 90%;
-    max-height: 85%;
+    max-width: 100%;
+    max-height: 100%;
     position: absolute;
     top: 5%;
     left: 50%;
@@ -38,7 +38,7 @@ export const ModalStyle = styled.div`
 
     h1 {
       color: #ffff;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
     }
 
     p {

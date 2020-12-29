@@ -2,8 +2,21 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
-  padding: 30px 70px;
+  padding: 30px 100px;
 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
+export const HeaderContent = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+`;
+
+export const Content = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;

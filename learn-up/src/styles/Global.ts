@@ -15,7 +15,7 @@ body {
 }
 
 body, input, button {
-  font-family: 'Roboto Slab', serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 13px;
 }
 
@@ -30,6 +30,7 @@ button {
 a {
   color: #fff;
   text-decoration: none;
+  cursor: pointer;
   
   &:hover {
   color: unset;

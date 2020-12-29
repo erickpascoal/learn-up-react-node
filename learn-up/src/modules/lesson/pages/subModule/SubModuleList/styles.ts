@@ -3,14 +3,26 @@ import styled from 'styled-components';
 import { tint } from 'polished'
 
 export const Container = styled.div`
-  padding: 30px 70px;
+  padding: 30px 100px;
 
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  flex-wrap: wrap;
 `;
 
-export const ContainerSubModule = styled.div`
+
+export const HeaderContent = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+
+  svg {
+    margin: 0 10px 0 10px;
+  }
+`;
+
+export const Content = styled.div`
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
