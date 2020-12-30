@@ -24,10 +24,10 @@ export const ModalStyle = styled.div`
     max-width: 100%;
     max-height: 100%;
     position: absolute;
+    border-radius: 5px;
     top: 5%;
     left: 50%;
     z-index: 2000;
-    border-radius: 3px;
     padding: 20px;
     background-color: #202024;
     -webkit-transform: translate(-50%, 0);

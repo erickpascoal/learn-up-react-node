@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { Link, useHistory, useRouteMatch } from 'react-router-dom';
 import { FaChevronRight } from 'react-icons/fa';
 import { FaArrowRight } from 'react-icons/fa';
 
@@ -19,6 +19,7 @@ const LessonList: React.FC = () => {
   const { params } = useRouteMatch<PropsParam>();
   const [moduleName, setModuleName] = useState<string | null>('');
   const [subModuleName, setSubModuleName] = useState<string | null>('');
+  const history = useHistory();
 
   const getModuleStorage = useCallback(async () => {
     const moduleName = sessionStorage.getItem('@LearnUp:moduleName');
@@ -40,6 +41,10 @@ const LessonList: React.FC = () => {
     window.history.back();
   }, []);
 
+  const handleCreateLesson = useCallback(() => {
+    history.push('/aula/cadastrar');
+  }, []);
+
   useEffect(() => {
     loadSubModules();
     getModuleStorage();
@@ -56,7 +61,7 @@ const LessonList: React.FC = () => {
             <FaArrowRight size={14} />
             {subModuleName}
           </h2>
-          <Button buttonClass="primary">Cadastrar</Button>
+          <Button buttonClass="primary" onClick={handleCreateLesson}>Cadastrar</Button>
         </HeaderContent>
 
         <Content>

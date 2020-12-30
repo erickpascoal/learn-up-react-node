@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { useRouteMatch } from 'react-router-dom';
+import { useHistory, useRouteMatch } from 'react-router-dom';
 import { FaArrowRight } from 'react-icons/fa';
 
 import { Container, Content, SubModule, HeaderContent } from './styles';
@@ -17,6 +17,7 @@ const SubModuleList: React.FC = () => {
   const { params } = useRouteMatch<PropsParam>();
   const [moduleId, setModuleId] = useState<string | null>('');
   const [moduleName, setModuleName] = useState<string | null>('');
+  const history = useHistory();
 
   const loadSubModules = useCallback(async () => {
     const response = await api.get(`/submodules/module/${params.moduleId}`);
@@ -39,6 +40,10 @@ const SubModuleList: React.FC = () => {
     window.history.back();
   }, []);
 
+  const handleCreateSubModule = useCallback(() => {
+    history.push('/modulo/cadastrar');
+  }, []);
+
   useEffect(() => {
     loadSubModules();
     getModuleStorage();
@@ -53,7 +58,7 @@ const SubModuleList: React.FC = () => {
           <FaArrowRight size={14} />
           {moduleName}
         </h2>
-        <Button buttonClass="primary">Cadastrar</Button>
+        <Button buttonClass="primary" onClick={handleCreateSubModule}>Cadastrar</Button>
       </HeaderContent>
 
       <Content>

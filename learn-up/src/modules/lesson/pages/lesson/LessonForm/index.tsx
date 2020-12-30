@@ -7,7 +7,7 @@ import TextArea from '../../../../../components/TextArea';
 import api from '../../../../../services/api';
 import { Container, Form } from './styles';
 
-const ModuleForm: React.FC = () => {
+const LessonForm: React.FC = () => {
 
   const { register, handleSubmit, watch, errors } = useForm();
 
@@ -15,35 +15,32 @@ const ModuleForm: React.FC = () => {
     window.history.back();
   }, []);
 
-  const onSubmit = useCallback(async ({ name, description, color }: any) => {
+  const onSubmit = useCallback(async ({ name, description }: any) => {
     try {
-      const module = {
+      const lesson = {
         name,
-        description,
-        color
+        description
       }
 
-      console.log('module', module);
-
-      await api.post('/modules', module);
+      await api.post('/lessons', lesson);
 
       goToBack();
     } catch (error) {
       alert('deu erro'); // criar component toast
     }
 
-  }, [goToBack]);
+  }, []);
 
   return (
     <Container>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <header>
-          <h1>Cadastro de curso</h1>
+          <h1>Cadastro de Aula</h1>
         </header>
 
         <Input name="name" placeholder="Nome" errors={errors} register={register({ required: true })} />
 
-        <ColorPicker name="color" placeholder="Cor" defaultValue="#8257e5" errors={errors} register={register({ required: true })} />
+        <Input name="link" placeholder="Link" errors={errors} register={register({ required: true })} />
 
         <TextArea name="description" placeholder="Descrição" errors={errors} register={register({ required: true })} />
 
@@ -57,4 +54,4 @@ const ModuleForm: React.FC = () => {
   );
 }
 
-export default ModuleForm;
+export default LessonForm;
