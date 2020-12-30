@@ -9,24 +9,21 @@ import Button from '../../../../../components/Button';
 import NoDataFound from '../../../../../components/NoDataFound';
 import api from '../../../../../services/api';
 
-interface PropsParam {
+interface ParamsProps {
   subModuleId: string;
 }
 
 const LessonList: React.FC = () => {
   const [lessons, setLessons] = useState([]);
   const [lessonSelected, setLessonSelected] = useState<any>(null);
-  const { params } = useRouteMatch<PropsParam>();
-  const [moduleName, setModuleName] = useState<string | null>('');
-  const [subModuleName, setSubModuleName] = useState<string | null>('');
+  const [subModule, setSubModule] = useState<any>(null);
+  const { params } = useRouteMatch<ParamsProps>();
   const history = useHistory();
 
-  const getModuleStorage = useCallback(async () => {
-    const moduleName = sessionStorage.getItem('@LearnUp:moduleName');
-    const subModuleName = sessionStorage.getItem('@LearnUp:subModuleName');
-    setModuleName(moduleName);
-    setSubModuleName(subModuleName);
-  }, []);
+  const loadActualSubModule = useCallback(async () => {
+    const response = await api.get(`/submodules/${params.subModuleId}`);
+    setSubModule(response.data);
+  }, [params.subModuleId]);
 
   const loadSubModules = useCallback(async () => {
     const response = await api.get(`/lessons/submodule/${params.subModuleId}`);
@@ -42,13 +39,13 @@ const LessonList: React.FC = () => {
   }, []);
 
   const handleCreateLesson = useCallback(() => {
-    history.push('/aula/cadastrar');
-  }, []);
+    history.push(`/modulo/${params.subModuleId}/aulas/cadastro`);
+  }, [history, params.subModuleId]);
 
   useEffect(() => {
+    loadActualSubModule();
     loadSubModules();
-    getModuleStorage();
-  }, [loadSubModules, getModuleStorage]);
+  }, [loadSubModules, loadActualSubModule]);
 
   return (
     <>
@@ -57,9 +54,9 @@ const LessonList: React.FC = () => {
           <h2>
             <Link to="/">Cursos</Link>
             <FaArrowRight size={14} />
-            <a onClick={goToBack}>{moduleName} </a>
+            <a onClick={goToBack}>{subModule?.module?.name} </a>
             <FaArrowRight size={14} />
-            {subModuleName}
+            {subModule?.name}
           </h2>
           <Button buttonClass="primary" onClick={handleCreateLesson}>Cadastrar</Button>
         </HeaderContent>

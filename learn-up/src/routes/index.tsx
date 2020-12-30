@@ -17,11 +17,11 @@ const Routes: React.FC = () => {
       <Header />
       <Switch>
         <Route path="/" exact component={ModuleList} />
-        <Route path="/curso/cadastrar" exact component={ModuleForm} />
-        <Route path="/modulo/cadastrar" exact component={SubModuleForm} />
-        <Route path="/aula/cadastrar" exact component={LessonForm} />
-        <Route path="/submodule/:moduleId" exact component={SubModuleList} />
-        <Route path="/lesson/:subModuleId" exact component={LessonList} />
+        <Route path="/curso/cadastro" exact component={ModuleForm} />
+        <Route path="/curso/:moduleId/modulos/cadastro" exact component={SubModuleForm} />
+        <Route path="/modulo/:subModuleId/aulas/cadastro" exact component={LessonForm} />
+        <Route path="/curso/:moduleId/modulos" exact component={SubModuleList} />
+        <Route path="/modulo/:subModuleId/aulas" exact component={LessonList} />
       </Switch>
     </BrowserRouter>
   );

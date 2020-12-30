@@ -1,14 +1,20 @@
 import React, { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
+import { useRouteMatch } from 'react-router-dom';
 import Button from '../../../../../components/Button';
 import Input from '../../../../../components/Input';
 import TextArea from '../../../../../components/TextArea';
 import api from '../../../../../services/api';
 import { Container, Form } from './styles';
 
+interface ParamsProps {
+  moduleId: string;
+}
+
 const SubModuleForm: React.FC = () => {
 
   const { register, handleSubmit, watch, errors } = useForm();
+  const { params } = useRouteMatch<ParamsProps>();
 
   const goToBack = useCallback(async () => {
     window.history.back();
@@ -16,12 +22,15 @@ const SubModuleForm: React.FC = () => {
 
   const onSubmit = useCallback(async ({ name, description }: any) => {
     try {
-      const module = {
+      const subModule = {
         name,
-        description
+        description,
+        module: {
+          id: params.moduleId
+        }
       }
 
-      await api.post('/modules', module);
+      await api.post('/submodules', subModule);
 
       goToBack();
     } catch (error) {

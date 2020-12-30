@@ -18,13 +18,8 @@ const ModuleList: React.FC = () => {
     loadModules();
   }, [loadModules]);
 
-  const setModuleStorage = useCallback((module: any) => {
-    sessionStorage.setItem('@LearnUp:moduleId', module.id);
-    sessionStorage.setItem('@LearnUp:moduleName', module.name);
-  }, []);
-
   const handleCreateModule = useCallback(() => {
-    history.push('/curso/cadastrar');
+    history.push('/curso/cadastro');
   }, []);
 
   return (
@@ -38,7 +33,7 @@ const ModuleList: React.FC = () => {
       <Content>
         {modules.length > 0 ?
           modules.map((module: any) => (
-            <Module key={module.id} onClick={() => setModuleStorage(module)} to={`/submodule/${module.id}`} >
+            <Module key={module.id} to={`/curso/${module.id}/modulos`} >
               <h1>{module.name}</h1>
               <p>{module.description}</p>
             </Module>

@@ -14,9 +14,8 @@ interface PropsParam {
 
 const SubModuleList: React.FC = () => {
   const [subModules, setSubModules] = useState([]);
+  const [module, setModule] = useState<any>(null);
   const { params } = useRouteMatch<PropsParam>();
-  const [moduleId, setModuleId] = useState<string | null>('');
-  const [moduleName, setModuleName] = useState<string | null>('');
   const history = useHistory();
 
   const loadSubModules = useCallback(async () => {
@@ -24,30 +23,23 @@ const SubModuleList: React.FC = () => {
     setSubModules(response.data);
   }, [params.moduleId]);
 
-  const getModuleStorage = useCallback(async () => {
-    const moduleId = sessionStorage.getItem('@LearnUp:moduleId');
-    const moduleName = sessionStorage.getItem('@LearnUp:moduleName');
-    setModuleId(moduleId);
-    setModuleName(moduleName);
-  }, []);
-
-  const setSubModuleStorage = useCallback((subModule: any) => {
-    sessionStorage.setItem('@LearnUp:subModuleId', subModule.id);
-    sessionStorage.setItem('@LearnUp:subModuleName', subModule.name);
-  }, []);
+  const loadActualModule = useCallback(async () => {
+    const response = await api.get(`/modules/${params.moduleId}`);
+    setModule(response.data);
+  }, [params.moduleId]);
 
   const goToBack = useCallback(async () => {
     window.history.back();
   }, []);
 
   const handleCreateSubModule = useCallback(() => {
-    history.push('/modulo/cadastrar');
-  }, []);
+    history.push(`/curso/${params.moduleId}/modulos/cadastro`);
+  }, [history, params.moduleId]);
 
   useEffect(() => {
+    loadActualModule();
     loadSubModules();
-    getModuleStorage();
-  }, [getModuleStorage, loadSubModules]);
+  }, [loadActualModule, loadSubModules]);
 
   return (
     <Container>
@@ -56,7 +48,7 @@ const SubModuleList: React.FC = () => {
         <h2>
           <a onClick={goToBack}>Cursos </a>
           <FaArrowRight size={14} />
-          {moduleName}
+          {module?.name}
         </h2>
         <Button buttonClass="primary" onClick={handleCreateSubModule}>Cadastrar</Button>
       </HeaderContent>
@@ -64,7 +56,7 @@ const SubModuleList: React.FC = () => {
       <Content>
         {subModules.length > 0 ?
           subModules.map((subModule: any) => (
-            <SubModule key={subModule.id} onClick={() => setSubModuleStorage(subModule)} to={`/lesson/${subModule.id}`} >
+            <SubModule key={subModule.id} to={`/modulo/${subModule.id}/aulas`} >
               <h1>{subModule.name}</h1>
               <p>{subModule.description}</p>
             </SubModule>
