@@ -57,7 +57,7 @@ export const SubModule = styled(Link)`
     border: 2px solid #8257e5;
   }
 
-  h1 {
+  h2 {
     color: #ffffff;
     margin-bottom: 15px
   }

@@ -1,5 +1,9 @@
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import styled, { css } from 'styled-components';
+import { Link, LinkProps } from 'react-router-dom';
+
+interface ModuleProps extends LinkProps {
+  bordercolor: string;
+}
 
 export const Container = styled.div`
   padding: 30px 100px;
@@ -22,7 +26,7 @@ export const Content = styled.div`
   flex-wrap: wrap;
 `;
 
-export const Module = styled(Link)`
+export const Module = styled(Link) <ModuleProps>`
   background-color: #202024;
   margin: 10px;
   width: 25%;
@@ -30,6 +34,8 @@ export const Module = styled(Link)`
   border-radius: 0px 8px 8px 0px;
   cursor: pointer;
   border-left: 2px solid #8257e5;
+  ${props => css`border-left-color: ${props.bordercolor}; `}; 
+
 
   display: flex;
   flex-direction: column;

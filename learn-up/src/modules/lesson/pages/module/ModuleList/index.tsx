@@ -14,13 +14,27 @@ const ModuleList: React.FC = () => {
     setModules(modules.data);
   }, []);
 
-  useEffect(() => {
-    loadModules();
-  }, [loadModules]);
 
   const handleCreateModule = useCallback(() => {
     history.push('/curso/cadastro');
-  }, []);
+  }, [history]);
+
+  const handleDeleteModule = useCallback(async (module: any) => {
+    await api.delete(`/modules/${module.id}`);
+
+    const index = modules.findIndex((m: any) => m.id === module.id);
+
+    const modulesTemp = [...modules];
+
+    modulesTemp.splice(index, 1);
+
+    setModules(modulesTemp);
+
+  }, [modules]);
+
+  useEffect(() => {
+    loadModules();
+  }, [loadModules]);
 
   return (
     <Container>
@@ -33,7 +47,12 @@ const ModuleList: React.FC = () => {
       <Content>
         {modules.length > 0 ?
           modules.map((module: any) => (
-            <Module key={module.id} to={`/curso/${module.id}/modulos`} >
+            <Module
+              bordercolor={module.color}
+              key={module.id}
+              to={`/curso/${module.id}/modulos`}
+            // onContextMenuCapture={() => handleDeleteModule(module)}
+            >
               <h1>{module.name}</h1>
               <p>{module.description}</p>
             </Module>

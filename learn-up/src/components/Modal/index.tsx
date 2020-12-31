@@ -11,10 +11,11 @@ interface ModalProps {
 const Modal: React.FC<ModalProps> = ({ children, closeModal, title }) => {
   return (
     <ContainerModal>
-      <FaTimes size={25} onClick={() => closeModal()} />
+
 
       <ModalStyle>
         <h1>{title}</h1>
+        <FaTimes size={25} onClick={() => closeModal()} />
         {children}
       </ModalStyle>
 

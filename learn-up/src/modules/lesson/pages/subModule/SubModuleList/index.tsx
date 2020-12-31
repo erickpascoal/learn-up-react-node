@@ -36,6 +36,29 @@ const SubModuleList: React.FC = () => {
     history.push(`/curso/${params.moduleId}/modulos/cadastro`);
   }, [history, params.moduleId]);
 
+  const handleDeleteSubModule = useCallback(async (subModule: any) => {
+    await api.delete(`/submodules/${subModule.id}`);
+
+    const index = subModules.findIndex((m: any) => m.id === subModule.id);
+
+    const subModulesTemp = [...subModules];
+
+    subModulesTemp.splice(index, 1);
+
+    setSubModules(subModulesTemp);
+
+  }, [subModules]);
+
+  const ellipsis = useCallback((text: string) => {
+    const limit = 150;
+    if (text.length > limit) {
+      return text.substring(0, limit) + '...';
+    }
+    return text;
+  }, []);
+
+
+
   useEffect(() => {
     loadActualModule();
     loadSubModules();
@@ -56,9 +79,13 @@ const SubModuleList: React.FC = () => {
       <Content>
         {subModules.length > 0 ?
           subModules.map((subModule: any) => (
-            <SubModule key={subModule.id} to={`/modulo/${subModule.id}/aulas`} >
-              <h1>{subModule.name}</h1>
-              <p>{subModule.description}</p>
+            <SubModule
+              key={subModule.id}
+              to={`/modulo/${subModule.id}/aulas`}
+            // onContextMenuCapture={() => handleDeleteSubModule(subModule)}
+            >
+              <h2>{subModule.name}</h2>
+              <p>{ellipsis(subModule.description)}</p>
             </SubModule>
           ))
           :

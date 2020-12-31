@@ -58,7 +58,7 @@ export const Lesson = styled.a`
     display: flex;
     flex-direction: column;
 
-    h1 {
+    h2 {
       color: #ffffff;
       margin-bottom: 15px
     }

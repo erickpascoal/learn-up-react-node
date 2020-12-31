@@ -42,6 +42,19 @@ const LessonList: React.FC = () => {
     history.push(`/modulo/${params.subModuleId}/aulas/cadastro`);
   }, [history, params.subModuleId]);
 
+  const handleDeleteLesson = useCallback(async (lesson: any) => {
+    await api.delete(`/lessons/${lesson.id}`);
+
+    const index = lessons.findIndex((l: any) => l.id === lesson.id);
+
+    const lessonsTemp = [...lessons];
+
+    lessonsTemp.splice(index, 1);
+
+    setLessons(lessonsTemp);
+
+  }, [lessons]);
+
   useEffect(() => {
     loadActualSubModule();
     loadSubModules();
@@ -64,9 +77,13 @@ const LessonList: React.FC = () => {
         <Content>
           {lessons.length > 0 ?
             lessons.map((lesson: any) => (
-              <Lesson key={lesson.id} onClick={() => setLessonSelected(lesson)}  >
+              <Lesson
+                key={lesson.id}
+                onClick={() => setLessonSelected(lesson)}
+              // onContextMenuCapture={() => handleDeleteLesson(lesson)}
+              >
                 <div>
-                  <h1>{lesson.name}</h1>
+                  <h2>{lesson.name}</h2>
                   <p>{lesson.description}</p>
                 </div>
 
