@@ -1,8 +1,8 @@
 import { Router } from 'express';
 
-import courseRouter from './course.routes';
-import moduleRouter from './module.routes';
-import lessonRouter from './lesson.routes';
+import courseRouter from '../modules/lesson/infra/http/routes/course.routes';
+import moduleRouter from '../modules/lesson/infra/http/routes/module.routes';
+import lessonRouter from '../modules/lesson/infra/http/routes/lesson.routes';
 
 const routes = Router();
 

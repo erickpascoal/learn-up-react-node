@@ -1,6 +1,6 @@
 import { Request, Response, Router } from 'express';
 import { getRepository } from 'typeorm';
-import Module from '../models/Module';
+import Module from '../../typeorm/models/Module';
 
 export class ModuleRouter {
 

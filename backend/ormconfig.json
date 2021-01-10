@@ -6,7 +6,7 @@
     "password": "postgres",
     "database": "learnup",
     "entities": [
-        "./src/models/*.ts"
+        "./src/modules/**/infra/typeorm/models/*.ts"
     ],
     "migrations": [
         "./src/database/migrations/*.ts"

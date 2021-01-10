@@ -1,6 +1,7 @@
 import { Request, Response, Router } from 'express';
-import { getRepository } from 'typeorm';
-import Course from '../models/Course';
+import CreateCourseService from '../../../services/course/CreateCourseService';
+import FindAllCourseService from '../../../services/course/FindAllCourseService';
+import FindByIdCourseService from '../../../services/course/FindByIdCourseService';
 
 export class CourseRouter {
 
@@ -20,9 +21,9 @@ export class CourseRouter {
 
   private async findAll(request: Request, response: Response) {
     try {
-      const repository = getRepository(Course);
+      const findAllCourseService = new FindAllCourseService();
 
-      const courses = await repository.find();
+      const courses = await findAllCourseService.execute();
 
       return response.status(200).json(courses);
     } catch (err) {
@@ -33,10 +34,9 @@ export class CourseRouter {
   private async findById(request: Request, response: Response) {
     try {
       const id = request.params.id;
+      const findByIdCourseService = new FindByIdCourseService();
 
-      const repository = getRepository(Course);
-
-      const course = await repository.findOne({ where: { id } });
+      const course = await findByIdCourseService.execute({ courseId: +id });
 
       return response.status(200).json(course);
     } catch (err) {
@@ -48,11 +48,9 @@ export class CourseRouter {
     try {
       const body = request.body;
 
-      const repository = getRepository(Course);
+      const createCourseService = new CreateCourseService();
 
-      const course = repository.create(body);
-
-      const newCourse = await repository.save(course);
+      const newCourse = await createCourseService.execute(body);
 
       return response.status(200).json(newCourse);
     } catch (err) {

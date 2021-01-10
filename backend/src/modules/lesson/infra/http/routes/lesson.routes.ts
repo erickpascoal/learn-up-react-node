@@ -1,7 +1,7 @@
 import { Request, Response, Router } from 'express';
 import { getRepository } from 'typeorm';
-import Course from '../models/Course';
-import Lesson from '../models/Lesson';
+import Course from '../../typeorm/models/Course';
+import Lesson from '../../typeorm/models/Lesson';
 
 export class LessonRouter {
 
