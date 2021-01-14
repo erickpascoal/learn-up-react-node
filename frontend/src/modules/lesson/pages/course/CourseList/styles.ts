@@ -1,6 +1,9 @@
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import { tint } from 'polished'
+import styled, { css } from 'styled-components';
+import { Link, LinkProps } from 'react-router-dom';
+
+interface CourseProps extends LinkProps {
+  bordercolor: string;
+}
 
 export const Container = styled.div`
   padding: 30px 100px;
@@ -15,37 +18,26 @@ export const HeaderContent = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-bottom: 20px;
-
-  h2 {
-    a {
-      color: #8a96a3;
-    }
-  }
-
-  svg {
-    color: #8a96a3;
-    margin: 0 10px 0 10px;
-  }
 `;
 
 export const Content = styled.div`
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   flex-wrap: wrap;
- `;
+`;
 
-export const SubModule = styled(Link)`
+export const Course = styled(Link) <CourseProps>`
   background-color: #202024;
   margin: 10px;
-  width: 10%;
-  min-width: 200px;
-  min-height: 300px;
-  border-radius: 8px;
+  width: 25%;
+  min-width: 300px;
+  border-radius: 0px 8px 8px 0px;
   cursor: pointer;
-  border: 2px solid #202024;
+  border-left: 2px solid #8257e5;
+  ${props => css`border-left-color: ${props.bordercolor}; `}; 
+
 
   display: flex;
-  text-align: center;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -53,11 +45,10 @@ export const SubModule = styled(Link)`
   transition: 0.2s ease 0s;
 
   :hover {
-    background-color: ${tint(0.03, '#202024')};
-    border: 2px solid #8257e5;
+    transform: translatey(-10px);
   }
 
-  h2 {
+  h1 {
     color: #ffffff;
     margin-bottom: 15px
   }

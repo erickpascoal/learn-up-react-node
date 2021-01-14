@@ -1,26 +1,43 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Container, Content, HeaderContent, Module } from './styles';
+import { useHistory, useRouteMatch } from 'react-router-dom';
+import { FaArrowRight } from 'react-icons/fa';
+
+import { Container, Content, Module, HeaderContent } from './styles';
 import Button from '../../../../../components/Button';
 import NoDataFound from '../../../../../components/NoDataFound';
-import { useHistory } from 'react-router-dom';
 import api from '../../../../../services/api';
+
+interface PropsParam {
+  moduleId: string;
+}
 
 const ModuleList: React.FC = () => {
   const [modules, setModules] = useState([]);
+  const [module, setModule] = useState<any>(null);
+  const { params } = useRouteMatch<PropsParam>();
   const history = useHistory();
 
+  const loadActualModule = useCallback(async () => {
+    const response = await api.get(`/courses/${params.moduleId}`);
+    setModule(response.data);
+  }, [params.moduleId]);
+
   const loadModules = useCallback(async () => {
-    const modules = await api.get('/courses');
-    setModules(modules.data);
+    const response = await api.get(`/modules/course/${params.moduleId}`);
+    setModules(response.data);
+  }, [params.moduleId]);
+
+
+  const goToBack = useCallback(async () => {
+    window.history.back();
   }, []);
 
-
   const handleCreateModule = useCallback(() => {
-    history.push('/curso/cadastro');
-  }, [history]);
+    history.push(`/curso/${params.moduleId}/modulos/cadastro`);
+  }, [history, params.moduleId]);
 
   const handleDeleteModule = useCallback(async (module: any) => {
-    await api.delete(`/courses/${module.id}`);
+    await api.delete(`/modules/${module.id}`);
 
     const index = modules.findIndex((m: any) => m.id === module.id);
 
@@ -32,15 +49,28 @@ const ModuleList: React.FC = () => {
 
   }, [modules]);
 
+  const ellipsis = useCallback((text: string) => {
+    const limit = 150;
+    if (text.length > limit) {
+      return text.substring(0, limit) + '...';
+    }
+    return text;
+  }, []);
+
   useEffect(() => {
+    loadActualModule();
     loadModules();
-  }, [loadModules]);
+  }, [loadActualModule, loadModules]);
 
   return (
     <Container>
 
       <HeaderContent>
-        <h2>Escolha um curso para iniciar</h2>
+        <h2>
+          <a onClick={goToBack}>Cursos </a>
+          <FaArrowRight size={14} />
+          {module?.name}
+        </h2>
         <Button buttonClass="primary" onClick={handleCreateModule}>Cadastrar</Button>
       </HeaderContent>
 
@@ -48,18 +78,17 @@ const ModuleList: React.FC = () => {
         {modules.length > 0 ?
           modules.map((module: any) => (
             <Module
-              bordercolor={module.color}
               key={module.id}
-              to={`/curso/${module.id}/modulos`}
+              to={`/modulo/${module.id}/aulas`}
             // onContextMenuCapture={() => handleDeleteModule(module)}
             >
-              <h1>{module.name}</h1>
-              <p>{module.description}</p>
+              <h2>{module.name}</h2>
+              <p>{ellipsis(module.description)}</p>
             </Module>
           ))
           :
           <NoDataFound>
-            <h3>Nenhuma curso foi cadastrado ainda.</h3>
+            <h3>Nenhum módulo foi cadastrado para este curso ainda.</h3>
           </NoDataFound>
         }
       </Content>

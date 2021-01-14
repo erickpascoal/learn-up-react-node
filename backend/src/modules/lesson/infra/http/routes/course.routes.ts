@@ -2,6 +2,7 @@ import { Request, Response, Router } from 'express';
 import CreateCourseService from '../../../services/course/CreateCourseService';
 import FindAllCourseService from '../../../services/course/FindAllCourseService';
 import FindByIdCourseService from '../../../services/course/FindByIdCourseService';
+import CourseRepository from '../../typeorm/repositories/CourseRepository';
 
 export class CourseRouter {
 
@@ -46,9 +47,11 @@ export class CourseRouter {
 
   private async create(request: Request, response: Response) {
     try {
+      const courseRepository = new CourseRepository();
+
       const body = request.body;
 
-      const createCourseService = new CreateCourseService();
+      const createCourseService = new CreateCourseService(courseRepository);
 
       const newCourse = await createCourseService.execute(body);
 
