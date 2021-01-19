@@ -57,4 +57,15 @@ export const Course = styled(Link) <CourseProps>`
     color: #87868B;
   }
 
+   img {
+    padding: 5px;
+    background-color: #121214;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    border: 2px solid #464646;
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+
 `;

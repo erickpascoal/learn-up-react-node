@@ -15,6 +15,8 @@ export default class Course {
   @Column('varchar')
   color: string;
 
+  @Column('varchar', { name: 'url_image' })
+  urlImage: string;
 
   @OneToMany(() => Module, module => module.course)
   modules: Module[];

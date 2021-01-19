@@ -7,9 +7,9 @@ export default class CreateCourseService {
   constructor(private courseRepository: ICourseRepository) {
   }
 
-  public async execute({ name, description }: CreateCourseDTO): Promise<CourseDTO> {
+  public async execute({ name, description, urlImage, color }: CreateCourseDTO): Promise<CourseDTO> {
 
-    const newCourse = await this.courseRepository.create({ name, description });
+    const newCourse = await this.courseRepository.create({ name, description, urlImage, color });
 
     return newCourse;
   }

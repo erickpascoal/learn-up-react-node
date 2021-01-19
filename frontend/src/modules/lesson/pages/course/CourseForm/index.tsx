@@ -5,8 +5,9 @@ import ColorPicker from '../../../../../components/ColorPicker';
 import Input from '../../../../../components/Input';
 import TextArea from '../../../../../components/TextArea';
 import api from '../../../../../services/api';
-import { Container, Form } from './styles';
+import { Container, Form, ConainerImage } from './styles';
 import axios from 'axios';
+import { FaImage } from 'react-icons/fa'
 
 const CourseForm: React.FC = () => {
 
@@ -18,7 +19,12 @@ const CourseForm: React.FC = () => {
   }, []);
 
   const uploadImage = useCallback(async (event) => {
-    const [file] = event.nativeEvent.target.files;
+
+    const [file] = event.nativeEvent?.target?.files;
+
+    if (!file) {
+      return;
+    }
 
     const [fileName, type] = file.name.split('.');
 
@@ -44,10 +50,9 @@ const CourseForm: React.FC = () => {
       const course = {
         name,
         description,
-        color
+        color,
+        urlImage: image
       }
-
-      console.log('course', course);
 
       await api.post('/courses', course);
 
@@ -56,7 +61,11 @@ const CourseForm: React.FC = () => {
       alert('deu erro'); // criar component toast
     }
 
-  }, [goToBack]);
+  }, [goToBack, image]);
+
+  const openUploadImage = useCallback(() => {
+    document.getElementById('uploadImage')?.click();
+  }, []);
 
   return (
     <Container>
@@ -65,10 +74,16 @@ const CourseForm: React.FC = () => {
           <h1>Cadastro de curso</h1>
         </header>
 
+        <ConainerImage>
+          {!image && <button onClick={() => openUploadImage()} type="button">
+            <FaImage />
+          </button>}
+          {image && <img onClick={() => openUploadImage()} src={image} />}
+          <input style={{ display: 'none' }} id="uploadImage" type="file" onChange={(file) => uploadImage(file)} />
+        </ConainerImage>
+
         <Input name="name" placeholder="Nome" errors={errors} register={register({ required: true })} />
 
-        {!image && <input type="file" onChange={(file) => uploadImage(file)} />}
-        {image && <img src={image} width={40} height={40} />}
 
         <ColorPicker name="color" placeholder="Cor" defaultValue="#8257e5" errors={errors} register={register({ required: true })} />
 

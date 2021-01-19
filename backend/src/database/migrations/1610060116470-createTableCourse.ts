@@ -10,6 +10,7 @@ export class createTableCourse1610060116470 implements MigrationInterface {
                 name varchar(255) NULL,
                 description varchar(255) NULL,
                 color varchar(255) NULL,
+                url_image text NULL,
 
                 CONSTRAINT pk_course PRIMARY KEY (id)
             );

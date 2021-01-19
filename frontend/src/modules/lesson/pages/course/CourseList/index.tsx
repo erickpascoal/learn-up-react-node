@@ -53,6 +53,7 @@ const CourseList: React.FC = () => {
               to={`/curso/${course.id}/modulos`}
             // onContextMenuCapture={() => handleDeleteCourse(course)}
             >
+              <img src={course.urlImage} />
               <h1>{course.name}</h1>
               <p>{course.description}</p>
             </Course>

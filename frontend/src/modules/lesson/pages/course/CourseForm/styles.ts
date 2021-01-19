@@ -39,3 +39,24 @@ export const Form = styled.form`
   }
 `;
 
+export const ConainerImage = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 10px;
+
+  svg {
+    font-size: 50px;
+    color: #464646;
+  }
+
+  button, img {
+    padding: 5px;
+    background-color: #121214;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 2px solid #464646;
+    cursor: pointer;
+  }
+`;
