@@ -1,6 +1,7 @@
 "use strict";
-describe('CreateCourse', function () {
-    it('should create a new course', function () {
-        expect(1 + 1).toBe(2);
-    });
+
+describe('CreateCourse', () => {
+  it('should create a new course', () => {
+    expect(1 + 1).toBe(2);
+  });
 });
