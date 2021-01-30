@@ -13,6 +13,7 @@ export class LessonRouter {
 
   public routes() {
     this.lessonRouter.get('', this.findAll);
+    this.lessonRouter.get('/:id', this.findById);
     this.lessonRouter.get('/module/:moduleId', this.findAllByCourseId);
     this.lessonRouter.post('', this.create);
 
@@ -40,6 +41,20 @@ export class LessonRouter {
       const lessons = await repository.find({ where: { module_id: moduleId } });
 
       return response.status(200).json(lessons);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  private async findById(request: Request, response: Response) {
+    try {
+      const lessonId = request.params.id;
+
+      const repository = getRepository(Lesson);
+
+      const lesson = await repository.findOne({ where: { id: lessonId } });
+
+      return response.status(200).json(lesson);
     } catch (err) {
       console.log(err);
     }

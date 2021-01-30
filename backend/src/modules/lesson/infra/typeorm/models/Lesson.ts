@@ -1,7 +1,6 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import Module from "./Module";
 
-
 @Entity('lesson')
 export default class Lesson {
   @PrimaryGeneratedColumn()
@@ -14,7 +13,13 @@ export default class Lesson {
   description: string;
 
   @Column('varchar')
+  type: string;
+
+  @Column('varchar')
   link: string;
+
+  @Column('varchar', { name: 'markdown_text' })
+  markdownText: string;
 
   @Column('int4')
   module_id: number;

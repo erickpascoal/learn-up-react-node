@@ -6,6 +6,7 @@ import CourseForm from '../modules/lesson/pages/course/CourseForm';
 import CourseList from '../modules/lesson/pages/course/CourseList';
 import LessonForm from '../modules/lesson/pages/lesson/LessonForm';
 import LessonList from '../modules/lesson/pages/lesson/LessonList';
+import LessonMarkdown from '../modules/lesson/pages/lesson/LessonMarkdown';
 import ModuleForm from '../modules/lesson/pages/module/ModuleForm';
 import ModuleList from '../modules/lesson/pages/module/ModuleList';
 
@@ -23,6 +24,7 @@ const Routes: React.FC = () => {
         <Route path="/curso/:moduleId/modulos/cadastro" exact component={ModuleForm} />
         <Route path="/modulo/:subModuleId/aulas" exact component={LessonList} />
         <Route path="/modulo/:subModuleId/aulas/cadastro" exact component={LessonForm} />
+        <Route path="/modulo/:subModuleId/aulas/:lessonId" exact component={LessonMarkdown} />
       </Switch>
     </BrowserRouter>
   );

@@ -2,14 +2,14 @@ import React, { InputHTMLAttributes } from 'react';
 
 import { Container, TextErro } from './styles';
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
   register?: any;
   label?: string;
   name: string;
   errors?: any;
 }
 
-const Input: React.FC<InputProps> = ({ name, label, register, errors, ...rest }) => {
+const Input: React.FC<Props> = ({ name, label, register, errors, ...rest }) => {
 
   const getMessageErro = () => {
     if (errors[name] && errors[name].message !== '') {

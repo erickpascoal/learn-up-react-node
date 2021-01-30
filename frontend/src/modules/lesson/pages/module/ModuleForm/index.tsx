@@ -2,8 +2,8 @@ import React, { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouteMatch } from 'react-router-dom';
 import Button from '../../../../../components/Button';
-import Input from '../../../../../components/Input';
-import TextArea from '../../../../../components/TextArea';
+import Input from '../../../../../components/form/Input';
+import TextArea from '../../../../../components/form/TextArea';
 import api from '../../../../../services/api';
 import { Container, Form } from './styles';
 

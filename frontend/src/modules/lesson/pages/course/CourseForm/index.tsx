@@ -1,9 +1,9 @@
 import React, { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Button from '../../../../../components/Button';
-import ColorPicker from '../../../../../components/ColorPicker';
-import Input from '../../../../../components/Input';
-import TextArea from '../../../../../components/TextArea';
+import ColorPicker from '../../../../../components/form/ColorPicker';
+import Input from '../../../../../components/form/Input';
+import TextArea from '../../../../../components/form/TextArea';
 import api from '../../../../../services/api';
 import { Container, Form, ConainerImage } from './styles';
 import axios from 'axios';

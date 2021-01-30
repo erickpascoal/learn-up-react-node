@@ -30,6 +30,14 @@ const LessonList: React.FC = () => {
     setLessons(response.data);
   }, [params]);
 
+  const handleSelectLesson = useCallback(async (lesson) => {
+    if (lesson.type == 'video') {
+      setLessonSelected(lesson)
+    } else {
+      history.push(`/modulo/${params.subModuleId}/aulas/${lesson.id}`);
+    }
+  }, [params.subModuleId]);
+
   const closeModal = useCallback(async () => {
     setLessonSelected(null);
   }, []);
@@ -79,7 +87,9 @@ const LessonList: React.FC = () => {
             lessons.map((lesson: any) => (
               <Lesson
                 key={lesson.id}
-                onClick={() => setLessonSelected(lesson)}
+                onClick={() => handleSelectLesson(lesson)
+
+                }
               // onContextMenuCapture={() => handleDeleteLesson(lesson)}
               >
                 <div>

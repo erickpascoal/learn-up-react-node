@@ -9,7 +9,9 @@ export class createTableLesson1610061352018 implements MigrationInterface {
                 id serial,
                 "name" varchar(255) NOT NULL,
                 description text NULL,
-                link text NOT NULL,
+                type text NOT NULL,
+                link text NULL,
+                markdown_text text NULL,
                 module_id int4 NOT NULL,
 
                 CONSTRAINT pk_lesson PRIMARY KEY (id),
