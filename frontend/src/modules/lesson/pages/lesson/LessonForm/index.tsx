@@ -7,12 +7,14 @@ import Select from '../../../../../components/form/Select';
 import TextArea from '../../../../../components/form/TextArea';
 import api from '../../../../../services/api';
 import { Container, Form } from './styles';
+import jsZip from 'jszip';
 
 interface ParamsProps {
   subModuleId: string;
 }
 
 const LessonForm: React.FC = () => {
+  let markdownText = ''
 
   const { register, handleSubmit, watch, errors } = useForm();
   const { params } = useRouteMatch<ParamsProps>();
@@ -22,7 +24,7 @@ const LessonForm: React.FC = () => {
     window.history.back();
   }, []);
 
-  const onSubmit = useCallback(async ({ name, description, type, link, markdownText }: any) => {
+  const onSubmit = useCallback(async ({ name, description, type, link }: any) => {
 
     try {
       const lesson = {
@@ -30,7 +32,7 @@ const LessonForm: React.FC = () => {
         description,
         type,
         link,
-        markdownText,
+        markdownText: markdownText,
         module: {
           id: params.subModuleId
         }
@@ -45,6 +47,39 @@ const LessonForm: React.FC = () => {
     }
 
   }, [goToBack, params.subModuleId]);
+
+
+  const getFile = useCallback(async (event) => {
+
+    const [file] = event.nativeEvent?.target?.files;
+
+    if (!file) {
+      return;
+    }
+
+    const files: any[] = [];
+
+    const zipFile = await jsZip.loadAsync(file);
+
+    await new Promise((resolve, reject) => {
+      Object.keys(zipFile.files).forEach(async function (filename) {
+        const fileData = await zipFile.files[filename].async('string');
+        files.push(fileData)
+
+        if (Object.keys(zipFile.files).length == files.length) {
+          resolve(files)
+        }
+      });
+    });
+
+    console.log('lista', files)
+    markdownText = files[0];
+
+    console.log(markdownText);
+
+
+  }, [markdownText]);
+
 
   return (
     <Container>
@@ -64,9 +99,11 @@ const LessonForm: React.FC = () => {
 
         {typeLesson == 'video' && <Input name="link" placeholder="Link" errors={errors} register={register({ required: false })} />}
 
-        {typeLesson == 'markdown' && <TextArea name="markdownText" placeholder="Markdown" errors={errors} register={register({ required: false })} />}
+        {typeLesson == 'markdown' && <input style={{ marginBottom: 20 }} type="file" onChange={(file) => getFile(file)} />}
 
         <TextArea name="description" placeholder="Descrição" errors={errors} register={register({ required: true })} />
+
+
 
         <footer>
           <Button buttonClass="primary" type="submit">Salvar</Button>
