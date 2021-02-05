@@ -24,20 +24,19 @@ const LessonForm: React.FC = () => {
     window.history.back();
   }, []);
 
-  const onSubmit = useCallback(async ({ name, description, type, link }: any) => {
+  const onSubmit = useCallback(async ({ name, description, link, text }: any) => {
 
     try {
       const lesson = {
         name,
         description,
-        type,
+        text,
         link,
         markdownText: markdownText,
         module: {
           id: params.subModuleId
         }
       }
-      console.log('aaaaaaa', lesson);
 
       await api.post('/lessons', lesson);
 
@@ -90,20 +89,26 @@ const LessonForm: React.FC = () => {
 
         <Input name="name" placeholder="Nome" errors={errors} register={register({ required: true })} />
 
-        <Select
+        {/* <Select
           name="type"
           options={[{ id: 'video', name: 'Video' }, { id: 'markdown', name: 'Markdown' }]}
           errors={errors} register={register({ required: false })}
           onChange={(event) => setTypeLesson(event.target.value)}
-        />
+        /> */}
 
-        {typeLesson == 'video' && <Input name="link" placeholder="Link" errors={errors} register={register({ required: false })} />}
+        {/* {typeLesson == 'video' && <Input name="link" placeholder="Link" errors={errors} register={register({ required: false })} />}
 
-        {typeLesson == 'markdown' && <input style={{ marginBottom: 20 }} type="file" onChange={(file) => getFile(file)} />}
+        {typeLesson == 'markdown' && <input style={{ marginBottom: 20 }} type="file" onChange={(file) => getFile(file)} />} */}
 
-        <TextArea name="description" placeholder="Descrição" errors={errors} register={register({ required: true })} />
+        <TextArea name="description" placeholder="Descrição curta" errors={errors}
+          register={register({
+            required: true,
+            maxLength: { message: 'Tamnho máximo: 100 caracteres', value: 100 }
+          })} />
 
+        <Input name="link" placeholder="Link" errors={errors} register={register({ required: false })} />
 
+        <TextArea name="text" placeholder="Texto simples, Markdown ou HTML" errors={errors} register={register()} />
 
         <footer>
           <Button buttonClass="primary" type="submit">Salvar</Button>

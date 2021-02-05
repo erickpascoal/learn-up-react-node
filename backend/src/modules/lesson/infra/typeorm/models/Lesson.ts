@@ -13,7 +13,7 @@ export default class Lesson {
   description: string;
 
   @Column('varchar')
-  type: string;
+  text: string;
 
   @Column('varchar')
   link: string;

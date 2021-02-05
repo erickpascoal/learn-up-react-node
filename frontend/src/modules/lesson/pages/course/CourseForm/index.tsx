@@ -5,7 +5,7 @@ import ColorPicker from '../../../../../components/form/ColorPicker';
 import Input from '../../../../../components/form/Input';
 import TextArea from '../../../../../components/form/TextArea';
 import api from '../../../../../services/api';
-import { Container, Form, ConainerImage } from './styles';
+import { Container, Form, ConainerImage, LogoCourse } from './styles';
 import axios from 'axios';
 import { FaImage } from 'react-icons/fa'
 
@@ -45,7 +45,7 @@ const CourseForm: React.FC = () => {
 
   }, [image]);
 
-  const onSubmit = useCallback(async ({ name, description, color }: any) => {
+  const onSubmit = useCallback(async ({ name, description, color = '#8257e5' }: any) => {
     try {
       const course = {
         name,
@@ -78,14 +78,15 @@ const CourseForm: React.FC = () => {
           {!image && <button onClick={() => openUploadImage()} type="button">
             <FaImage />
           </button>}
-          {image && <img onClick={() => openUploadImage()} src={image} />}
+          {image &&
+            <LogoCourse>
+              <img onClick={() => openUploadImage()} src={image} />
+            </LogoCourse>
+          }
           <input style={{ display: 'none' }} id="uploadImage" type="file" onChange={(file) => uploadImage(file)} />
         </ConainerImage>
 
         <Input name="name" placeholder="Nome" errors={errors} register={register({ required: true })} />
-
-
-        <ColorPicker name="color" placeholder="Cor" defaultValue="#8257e5" errors={errors} register={register({ required: true })} />
 
         <TextArea name="description" placeholder="Descrição" errors={errors} register={register({ required: true })} />
 

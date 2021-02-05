@@ -8,6 +8,7 @@ import Modal from '../../../../../components/Modal';
 import Button from '../../../../../components/Button';
 import NoDataFound from '../../../../../components/NoDataFound';
 import api from '../../../../../services/api';
+import MarkdownView from '../../../../../components/MarkdownView';
 
 interface ParamsProps {
   subModuleId: string;
@@ -31,12 +32,8 @@ const LessonList: React.FC = () => {
   }, [params]);
 
   const handleSelectLesson = useCallback(async (lesson) => {
-    if (lesson.type == 'video') {
-      setLessonSelected(lesson)
-    } else {
-      history.push(`/modulo/${params.subModuleId}/aulas/${lesson.id}`);
-    }
-  }, [params.subModuleId]);
+    setLessonSelected(lesson)
+  }, []);
 
   const closeModal = useCallback(async () => {
     setLessonSelected(null);
@@ -114,9 +111,12 @@ const LessonList: React.FC = () => {
       { lessonSelected &&
         <Modal title={lessonSelected.name} closeModal={() => closeModal()}>
 
-          <iframe src={lessonSelected.link}
-            width="800" height="450" allow="autoplay; fullscreen" ></iframe>
+          <div style={{ textAlign: 'center' }}>
+            {lessonSelected.link && <iframe src={lessonSelected.link}
+              width="800" height="450" style={{ marginBottom: 20 }} allow="autoplay; fullscreen" ></iframe>}
+          </div>
 
+          {lessonSelected.text && <MarkdownView value={lessonSelected.text} />}
         </Modal>
       }
     </>

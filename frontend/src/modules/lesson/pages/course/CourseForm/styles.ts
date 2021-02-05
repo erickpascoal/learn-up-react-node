@@ -50,7 +50,7 @@ export const ConainerImage = styled.div`
     color: #464646;
   }
 
-  button, img {
+  button {
     padding: 5px;
     background-color: #121214;
     width: 150px;
@@ -58,5 +58,20 @@ export const ConainerImage = styled.div`
     border-radius: 50%;
     border: 2px solid #464646;
     cursor: pointer;
+  }
+`;
+
+export const LogoCourse = styled.div`
+    padding: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    position: relative;
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+
+   img {
+    width: 100%;
+    height: auto;
   }
 `;

@@ -1,0 +1,7 @@
+.mde-header {
+  display: none;
+}
+
+.mde-preview .mde-preview-content pre {
+  background-color: #403b3b;
+}

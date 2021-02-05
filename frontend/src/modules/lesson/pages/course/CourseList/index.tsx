@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Container, Content, HeaderContent, Course } from './styles';
+import { Container, Content, HeaderContent, Course, LogoCourse } from './styles';
 import Button from '../../../../../components/Button';
 import NoDataFound from '../../../../../components/NoDataFound';
 import { useHistory } from 'react-router-dom';
@@ -53,7 +53,9 @@ const CourseList: React.FC = () => {
               to={`/curso/${course.id}/modulos`}
             // onContextMenuCapture={() => handleDeleteCourse(course)}
             >
-              <img src={course.urlImage} />
+              <LogoCourse>
+                <img src={course.urlImage} />
+              </LogoCourse>
               <h1>{course.name}</h1>
               <p>{course.description}</p>
             </Course>

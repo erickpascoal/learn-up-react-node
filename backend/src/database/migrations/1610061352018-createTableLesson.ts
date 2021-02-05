@@ -9,7 +9,7 @@ export class createTableLesson1610061352018 implements MigrationInterface {
                 id serial,
                 "name" varchar(255) NOT NULL,
                 description text NULL,
-                type text NOT NULL,
+                text text NULL,
                 link text NULL,
                 markdown_text text NULL,
                 module_id int4 NOT NULL,

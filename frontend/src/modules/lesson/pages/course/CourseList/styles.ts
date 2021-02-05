@@ -57,15 +57,19 @@ export const Course = styled(Link) <CourseProps>`
     color: #87868B;
   }
 
-   img {
-    padding: 5px;
-    background-color: #121214;
-    width: 130px;
-    height: 130px;
-    border-radius: 50%;
-    border: 2px solid #464646;
-    cursor: pointer;
-    margin-bottom: 10px;
-  }
+`;
 
+export const LogoCourse = styled.div`
+    padding: 10px;
+    margin-bottom: 10px;
+
+    position: relative;
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+
+   img {
+    width: 100%;
+    height: auto;
+  }
 `;

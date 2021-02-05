@@ -14,9 +14,13 @@ const Modal: React.FC<ModalProps> = ({ children, closeModal, title }) => {
 
 
       <ModalStyle>
-        <h1>{title}</h1>
-        <FaTimes size={25} onClick={() => closeModal()} />
+        <header>
+          <h1>{title}</h1>
+          <FaTimes size={25} onClick={() => closeModal()} />
+        </header>
+
         {children}
+
       </ModalStyle>
 
     </ContainerModal>
