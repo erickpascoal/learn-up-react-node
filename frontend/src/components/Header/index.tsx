@@ -22,13 +22,15 @@ const Header: React.FC = () => {
 
   return (
     <Container >
-      <Link to="/">Learn-up</Link>
-      { showBackButtton &&
-        <button onClick={goBack}>
-          <FaArrowLeft size={14} />
-          <h3> Voltar</h3>
-        </button>
-      }
+      <header>
+        <Link to="/">Learn-up</Link>
+        {showBackButtton &&
+          <button onClick={goBack}>
+            <FaArrowLeft size={14} />
+            <h3> Voltar</h3>
+          </button>
+        }
+      </header>
     </Container>
 
   );

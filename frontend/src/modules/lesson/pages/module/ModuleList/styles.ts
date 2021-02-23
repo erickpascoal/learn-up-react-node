@@ -3,18 +3,23 @@ import styled from 'styled-components';
 import { tint } from 'polished'
 
 export const Container = styled.div`
-  padding: 30px 100px;
-
+  width: 100%;
+  padding-bottom: 20px;
+  
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 `;
 
 export const HeaderContent = styled.div`
+  width: 90%;
+  max-width: 980px;
+  margin: 20px 0;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 20px;
 
   h2 {
     a {
@@ -26,20 +31,27 @@ export const HeaderContent = styled.div`
     color: #8a96a3;
     margin: 0 10px 0 10px;
   }
+
+  @media (max-width: 500px) {
+    flex-direction: column-reverse;
+    
+    h2 {
+      margin-top: 5px;
+    }
+  }
 `;
 
 export const Content = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
+  width: 90%;
+  max-width: 980px;
+
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
  `;
 
 export const Module = styled(Link)`
   background-color: #202024;
-  margin: 10px;
-  width: 10%;
-  min-width: 200px;
-  min-height: 300px;
   border-radius: 8px;
   cursor: pointer;
   border: 2px solid #202024;

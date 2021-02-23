@@ -6,31 +6,47 @@ interface CourseProps extends LinkProps {
 }
 
 export const Container = styled.div`
-  padding: 30px 100px;
+  width: 100%;
+  padding-bottom: 20px;
 
   display: flex;
+  align-items: center;
   flex-direction: column;
-  justify-content: center;
+`;
+
+
+export const Content = styled.div`
+  width: 90%;
+  max-width: 980px;
+
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 `;
 
 export const HeaderContent = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 20px;
-`;
+  margin: 20px 0;
+  width: 90%;
+  max-width: 980px;
 
-export const Content = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+  h2 {
+    font-size: 2.6rem;
+  }
+
+  @media (max-width: 500px) {
+    flex-direction: column-reverse;
+        
+    h2 {
+      margin-top: 5px;
+    }
+  }
 `;
 
 export const Course = styled(Link) <CourseProps>`
   background-color: #202024;
-  margin: 10px;
-  width: 25%;
-  min-width: 300px;
   border-radius: 0px 8px 8px 0px;
   cursor: pointer;
   border-left: 2px solid #8257e5;
@@ -50,11 +66,14 @@ export const Course = styled(Link) <CourseProps>`
 
   h1 {
     color: #ffffff;
-    margin-bottom: 15px
+    margin-bottom: 15px;
+    font-size: 3.6rem;
   }
 
   p{
     color: #87868B;
+    font-size: 1.6rem;
+
   }
 
 `;

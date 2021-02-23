@@ -8,6 +8,12 @@ export default createGlobalStyle`
     outline: 0;
 }
 
+html {
+  /* a cada 1rem será considera 10px */
+  font-size: 62.5%;
+}
+
+
 body {
   background-color: #121214;
   color: #ffffff;
@@ -35,6 +41,13 @@ a {
   &:hover {
   color: unset;
   text-decoration: none;
+  }
+}
+
+
+@media (max-width: 768px) {
+  html {
+    font-size: 50%;
   }
 }
 `;
