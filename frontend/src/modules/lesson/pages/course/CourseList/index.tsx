@@ -39,15 +39,12 @@ const CourseList: React.FC = () => {
   return (
     <Container>
 
-
       <HeaderContent>
         <h2>Escolha um curso para iniciar</h2>
         <Button buttonClass="primary" onClick={handleCreateCourse}>Cadastrar</Button>
       </HeaderContent>
 
       <Content>
-
-
         {courses.length > 0 ?
           courses.map((course: any) => (
             <Course

@@ -20,10 +20,6 @@ export const ButtonStyle = styled.button<ButtonProps>`
 
   ${props => css`background-color: ${props.backgroundColor}; `}; 
   ${props => css`color: ${props.color}; `}; 
-  
-  & + button {
-    margin-left: 5px;
-  }
 
   &:hover {
     ${props => css`background-color: ${tint(0.1, `${props.backgroundColor}`)}`}; 

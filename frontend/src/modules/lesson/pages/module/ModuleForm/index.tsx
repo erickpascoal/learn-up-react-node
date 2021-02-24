@@ -5,7 +5,7 @@ import Button from '../../../../../components/Button';
 import Input from '../../../../../components/form/Input';
 import TextArea from '../../../../../components/form/TextArea';
 import api from '../../../../../services/api';
-import { Container, Form } from './styles';
+import { Container, Content, Form, HeaderContent } from './styles';
 
 interface ParamsProps {
   moduleId: string;
@@ -41,21 +41,24 @@ const ModuleForm: React.FC = () => {
 
   return (
     <Container>
-      <Form onSubmit={handleSubmit(onSubmit)}>
-        <header>
-          <h1>Cadastro de modulo</h1>
-        </header>
 
-        <Input name="name" placeholder="Nome" errors={errors} register={register({ required: true })} />
+      <HeaderContent>
+        <h2>Cadastro de módulo</h2>
+      </HeaderContent>
 
-        <TextArea name="description" placeholder="Descrição" errors={errors} register={register({ required: true })} />
+      <Content>
+        <Form onSubmit={handleSubmit(onSubmit)}>
 
-        <footer>
-          <Button buttonClass="primary" type="submit">Salvar</Button>
-          <Button buttonClass="dark" type="button" onClick={goToBack}>Cancelar</Button>
-        </footer>
-      </Form>
+          <Input name="name" placeholder="Nome" errors={errors} register={register({ required: true })} />
 
+          <TextArea name="description" placeholder="Descrição" errors={errors} register={register({ required: true })} />
+
+          <footer>
+            <Button buttonClass="primary" type="submit">Salvar</Button>
+            <Button buttonClass="dark" type="button" onClick={goToBack}>Cancelar</Button>
+          </footer>
+        </Form>
+      </Content>
     </Container>
   );
 }

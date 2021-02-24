@@ -3,10 +3,9 @@ import { useForm } from 'react-hook-form';
 import { useRouteMatch } from 'react-router-dom';
 import Button from '../../../../../components/Button';
 import Input from '../../../../../components/form/Input';
-import Select from '../../../../../components/form/Select';
 import TextArea from '../../../../../components/form/TextArea';
 import api from '../../../../../services/api';
-import { Container, Form } from './styles';
+import { Container, Content, Form, HeaderContent } from './styles';
 import jsZip from 'jszip';
 
 interface ParamsProps {
@@ -82,40 +81,44 @@ const LessonForm: React.FC = () => {
 
   return (
     <Container>
-      <Form onSubmit={handleSubmit(onSubmit)}>
-        <header>
-          <h1>Cadastro de Aula</h1>
-        </header>
 
-        <Input name="name" placeholder="Nome" errors={errors} register={register({ required: true })} />
+      <HeaderContent>
+        <h2>Cadastro de curso</h2>
+      </HeaderContent>
 
-        {/* <Select
+      <Content>
+
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <Input name="name" placeholder="Nome" errors={errors} register={register({ required: true })} />
+
+          {/* <Select
           name="type"
           options={[{ id: 'video', name: 'Video' }, { id: 'markdown', name: 'Markdown' }]}
           errors={errors} register={register({ required: false })}
           onChange={(event) => setTypeLesson(event.target.value)}
         /> */}
 
-        {/* {typeLesson == 'video' && <Input name="link" placeholder="Link" errors={errors} register={register({ required: false })} />}
+          {/* {typeLesson == 'video' && <Input name="link" placeholder="Link" errors={errors} register={register({ required: false })} />}
 
         {typeLesson == 'markdown' && <input style={{ marginBottom: 20 }} type="file" onChange={(file) => getFile(file)} />} */}
 
-        <TextArea name="description" placeholder="Descrição curta" errors={errors}
-          register={register({
-            required: true,
-            maxLength: { message: 'Tamnho máximo: 100 caracteres', value: 100 }
-          })} />
+          <TextArea name="description" placeholder="Descrição curta" errors={errors}
+            register={register({
+              required: true,
+              maxLength: { message: 'Tamnho máximo: 100 caracteres', value: 100 }
+            })} />
 
-        <Input name="link" placeholder="Link" errors={errors} register={register({ required: false })} />
+          <Input name="link" placeholder="Link do vídeo" errors={errors} register={register({ required: false })} />
 
-        <TextArea name="text" placeholder="Texto simples, Markdown ou HTML" errors={errors} register={register()} />
+          <TextArea name="text" placeholder="Texto simples, Markdown ou HTML" errors={errors} register={register()} />
 
-        <footer>
-          <Button buttonClass="primary" type="submit">Salvar</Button>
-          <Button buttonClass="dark" type="button" onClick={goToBack}>Cancelar</Button>
-        </footer>
-      </Form>
+          <footer>
+            <Button buttonClass="primary" type="submit">Salvar</Button>
+            <Button buttonClass="dark" type="button" onClick={goToBack}>Cancelar</Button>
+          </footer>
+        </Form>
 
+      </Content>
     </Container>
   );
 }

@@ -14,16 +14,6 @@ export const Container = styled.div`
   flex-direction: column;
 `;
 
-
-export const Content = styled.div`
-  width: 90%;
-  max-width: 980px;
-
-  display: grid;
-  grid-gap: 20px;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-`;
-
 export const HeaderContent = styled.div`
   display: flex;
   align-items: center;
@@ -43,6 +33,15 @@ export const HeaderContent = styled.div`
       margin-top: 5px;
     }
   }
+`;
+
+export const Content = styled.div`
+  width: 90%;
+  max-width: 980px;
+
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 `;
 
 export const Course = styled(Link) <CourseProps>`

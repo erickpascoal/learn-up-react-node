@@ -1,11 +1,10 @@
 import React, { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Button from '../../../../../components/Button';
-import ColorPicker from '../../../../../components/form/ColorPicker';
 import Input from '../../../../../components/form/Input';
 import TextArea from '../../../../../components/form/TextArea';
 import api from '../../../../../services/api';
-import { Container, Form, ConainerImage, LogoCourse } from './styles';
+import { Container, Content, Form, ConainerImage, LogoCourse, HeaderContent } from './styles';
 import axios from 'axios';
 import { FaImage } from 'react-icons/fa'
 
@@ -69,32 +68,35 @@ const CourseForm: React.FC = () => {
 
   return (
     <Container>
-      <Form onSubmit={handleSubmit(onSubmit)}>
-        <header>
-          <h1>Cadastro de curso</h1>
-        </header>
 
-        <ConainerImage>
-          {!image && <button onClick={() => openUploadImage()} type="button">
-            <FaImage />
-          </button>}
-          {image &&
-            <LogoCourse>
-              <img onClick={() => openUploadImage()} src={image} />
-            </LogoCourse>
-          }
-          <input style={{ display: 'none' }} id="uploadImage" type="file" onChange={(file) => uploadImage(file)} />
-        </ConainerImage>
+      <HeaderContent>
+        <h2>Cadastro de curso</h2>
+      </HeaderContent>
 
-        <Input name="name" placeholder="Nome" errors={errors} register={register({ required: true })} />
+      <Content>
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <ConainerImage>
+            {!image && <button onClick={() => openUploadImage()} type="button">
+              <FaImage />
+            </button>}
+            {image &&
+              <LogoCourse>
+                <img onClick={() => openUploadImage()} src={image} />
+              </LogoCourse>
+            }
+            <input style={{ display: 'none' }} id="uploadImage" type="file" onChange={(file) => uploadImage(file)} />
+          </ConainerImage>
 
-        <TextArea name="description" placeholder="Descrição" errors={errors} register={register({ required: true })} />
+          <Input name="name" placeholder="Nome" errors={errors} register={register({ required: true })} />
 
-        <footer>
-          <Button buttonClass="primary" type="submit">Salvar</Button>
-          <Button buttonClass="dark" type="button" onClick={goToBack}>Cancelar</Button>
-        </footer>
-      </Form>
+          <TextArea name="description" placeholder="Descrição" errors={errors} register={register({ required: true })} />
+
+          <footer>
+            <Button buttonClass="primary" type="submit">Salvar</Button>
+            <Button buttonClass="dark" type="button" onClick={goToBack}>Cancelar</Button>
+          </footer>
+        </Form>
+      </Content>
 
     </Container>
   );

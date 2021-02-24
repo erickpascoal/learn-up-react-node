@@ -19,6 +19,8 @@ export const HeaderContent = styled.div`
   margin: 20px 0;
 
   h2 {
+    font-size: 2.6rem;
+    
     a {
       color: #8a96a3;
     }
