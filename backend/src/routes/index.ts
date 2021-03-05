@@ -9,7 +9,7 @@ const routes = Router();
 
 routes.use('/courses', courseRouter);
 routes.use('/modules', moduleRouter);
-routes.use('/lessons', lessonRouter);
+routes.use('/lessons', lessonRouter); 
 routes.use('/aws', awsRouter);
 
 export default routes;
